@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
             $table->integer('program_id')->nullable();
             $table->string('student_number');
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->timestamps();
             $table->foreign('class_id')->references('id')->on('sge_classes')->onDelete('cascade');
         });

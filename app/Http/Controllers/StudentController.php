@@ -6,6 +6,8 @@ use App\Models\Course;
 use App\Models\SGEClass;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Imports\StudentImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -37,8 +39,13 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        Student::create($request->all());
-        return back();
+        if($request->has('file'))
+        {
+            Excel::import(new StudentImport($request->class_id), $request->file('file'));
+        } else {
+            Student::create($request->all());
+            return back();
+        }
     }
 
     /**

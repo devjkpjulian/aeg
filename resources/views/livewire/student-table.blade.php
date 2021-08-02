@@ -50,7 +50,7 @@
                                 {{ $student->email }}
                             </td>
                             <td class="px-6 py-4 text-sm text-left text-gray-500 whitespace-nowrap">
-                                {{ $programs->where('id', $student->program_id)->first()->abbreviation }}
+                                {{ !is_null($student->program_id) ? $programs->where('id', $student->program_id)->first()->abbreviation : '' }}
                             </td>
                             <td class="flex flex-row items-center justify-center px-6 py-4 space-x-2 text-sm font-medium text-center whitespace-nowrap">
                                 <a href="{{ route('students.edit',$student->id) }}" class="text-center text-gray-600 hover:text-gray-900"><i class="fas fa-edit"></i></a>
