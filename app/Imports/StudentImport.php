@@ -28,6 +28,6 @@ class StudentImport implements ToCollection
                 'name' => $collection[1],
             ]);
         }
-        return back();
+        return redirect()->route('sge_classes');
     }
 }
