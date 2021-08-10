@@ -12,18 +12,26 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(auth()->user()->role != 4)
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    @endif
+                    @if(auth()->user()->role == 0 || auth()->user()->role == 1)
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}
                     </x-jet-nav-link>
+                    @endif
+                    @if(auth()->user()->role == 0 || auth()->user()->role == 1 || auth()->user()->role == 2)
                     <x-jet-nav-link href="{{ route('departments.index') }}" :active="request()->routeIs('departments.index')">
                         {{ __('Departments') }}
                     </x-jet-nav-link>
+                    @endif
+                    @if(auth()->user()->role !=4)
                     <x-jet-nav-link href="{{ route('sge_types.index') }}" :active="request()->routeIs('sge_types.index')">
                         {{ __('SGE Types') }}
                     </x-jet-nav-link>
+                    @endif
                     <x-jet-nav-link href="{{ route('sge_classes.index') }}" :active="request()->routeIs('sge_classes.index')">
                         {{ __('Classlist') }}
                     </x-jet-nav-link>
@@ -150,8 +158,9 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            {{-- ICEP, ILRAD & DEAN --}}
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Dashboard') .' '. auth()->user()->role }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                 {{ __('Users') }}

@@ -42,6 +42,7 @@ class StudentController extends Controller
         if($request->has('file'))
         {
             Excel::import(new StudentImport($request->class_id), $request->file('file'));
+            return redirect()->route('sge_classes.index');
         } else {
             Student::create($request->all());
             return back();
